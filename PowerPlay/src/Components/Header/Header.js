@@ -24,6 +24,7 @@ function ProfileModal({ isOpen, onClose }) {
     onClose();
     updateUsername("");
     if (theme === "dark") toggleTheme();
+    localStorage.setItem("userName", "");
     navigate("/");
     setImage(ProfileImage);
   };
