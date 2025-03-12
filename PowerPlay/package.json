@@ -2,7 +2,6 @@
   "name": "powerplay",
   "version": "1.0.0",
   "description": "Intern Project",
-  "main": "index.js",
   "extends": "@parcel/config-default",
   "dependencies": {
     "ansi-styles": "^4.3.0",
