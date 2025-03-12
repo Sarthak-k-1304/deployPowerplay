@@ -1,0 +1,118 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+.statsContainer {
+  @include size(auto, 90%);
+  @include flex(column, null, null, 1rem);
+  margin: 4rem auto;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.controls {
+  @include flex(row, space-between);
+}
+.filterIcon {
+  cursor: pointer;
+  @include flex-center;
+  font-size: 1.5rem;
+}
+.searchInput {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  width: 20rem;
+  body[data-theme="dark"] & {
+    background: rgb(223, 223, 223);
+  }
+}
+
+.tableWrapper {
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.statsTable {
+  width: 100%;
+  border-collapse: collapse;
+  th {
+    text-align: left;
+    padding: 10px;
+    background: $body-bg-color;
+    font-weight: bold;
+    border: 0.1rem solid #ccc;
+    border-collapse: collapse;
+    body[data-theme="dark"] & {
+      background: $primary-background-dark;
+    }
+  }
+
+  td {
+    padding: 10px;
+    background: #fff;
+    border: 0.1rem solid #ccc;
+    border-collapse: collapse;
+    @include size(auto, calc(100% / 4));
+    body[data-theme="dark"] & {
+      background: rgb(223, 223, 223);
+      color: black;
+    }
+  }
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+
+  .pageNav {
+    cursor: pointer;
+    margin: 0 10px;
+    color: #007bff;
+  }
+
+  .pageNumber {
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .active {
+    background-color: #007bff;
+    color: white;
+  }
+}
+
+.loader {
+  width: 50px;
+  --b: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000 10%, #f03355) content-box;
+  -webkit-mask: repeating-conic-gradient(
+      #0000 0deg,
+      #000 1deg 20deg,
+      #0000 21deg 36deg
+    ),
+    radial-gradient(
+      farthest-side,
+      #0000 calc(100% - var(--b) - 1px),
+      #000 calc(100% - var(--b))
+    );
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: l4 1s infinite steps(10);
+}
+@keyframes l4 {
+  to {
+    transform: rotate(1turn);
+  }
+}

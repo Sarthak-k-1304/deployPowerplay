@@ -1,0 +1,17 @@
+// light mode
+
+$body-bg-color: #ffffff;
+$primary-text-color: #333333;
+$secondary-text-color: #ffffff;
+$primary-background: linear-gradient(to right, #ed7474, #ffb359);
+$secondary-background: linear-gradient(to right, #cdffd8, #94f2ff);
+$box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+//dark mode
+$body-bg-color-dark: #1c1c1c;
+$primary-text-color-dark: #e0e0e0;
+$secondary-text-color-dark: #ffb359;
+$primary-background-dark: linear-gradient(to right, #141e30, #243b55);
+$secondary-background-dark: linear-gradient(to right, #0f2027, #203a43);
+$box-shadow-dark: 0 2px 10px rgba(255, 255, 255, 0.1);
+$card-bg-color-dark: #2a2a2a;

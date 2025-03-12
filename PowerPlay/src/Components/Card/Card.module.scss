@@ -1,0 +1,43 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+.card {
+  @include size(25rem, clamp(20rem, (100%/4), 20rem));
+  @include flex(column, space-between);
+  box-shadow: $box-shadow;
+  @include boxstyle(0, 2rem 1rem 1rem 1.5rem, border-box);
+  border-radius: 2rem;
+  body[data-theme="dark"] & {
+    box-shadow: $box-shadow-dark;
+    background-color: $card-bg-color-dark;
+  }
+  @media (max-width: 1222px) {
+    @include size(25rem, clamp(20rem, (100%/2.4), 20rem));
+  }
+  @media (max-width: 870px) {
+    @include size(22rem, clamp(20rem, (100%/1.4), 20rem));
+  }
+}
+.content {
+  @include flex(column, null, null, 1rem);
+}
+.action {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 200%;
+}
+
+.navigate {
+  display: none;
+}
+.card:hover {
+  background: $secondary-background;
+  body[data-theme="dark"] & {
+    color: $primary-text-color-dark;
+    background: $secondary-background-dark;
+  }
+  cursor: pointer;
+}
+.card:hover .navigate {
+  display: flex;
+}

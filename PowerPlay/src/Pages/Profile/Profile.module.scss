@@ -1,0 +1,5 @@
+@use "../../styles/mixins" as *;
+.profile {
+  @include flex(row, center);
+  @include min-size(90vh);
+}

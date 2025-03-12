@@ -1,0 +1,27 @@
+.grid {
+  height: 40vh;
+  width: 40vh;
+  display: flex;
+  flex-direction: column;
+  border: 0.3vh solid black;
+  box-sizing: border-box;
+}
+
+.col {
+  width: 100%;
+  height: calc(100% / 3);
+  display: flex;
+  border: 0.1vh solid black;
+}
+
+.cell {
+  height: 100%;
+  width: calc(100% / 3);
+  border: 0.1vh solid black;
+}
+.wrapper {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

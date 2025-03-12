@@ -1,0 +1,35 @@
+@use "./variables" as *;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: $body-bg-color;
+  color: $primary-text-color;
+}
+
+body[data-theme="dark"] {
+  background-color: $body-bg-color-dark;
+  color: $primary-text-color-dark;
+}
+
+$start-width: 690px;
+$step: 40px;
+$initial-font-size: 16px;
+
+html {
+  font-size: $initial-font-size;
+
+  @for $i from 0 through 10 {
+    $current-width: $start-width - ($i * $step);
+    $current-font-size: $initial-font-size - $i;
+
+    @media (max-width: $current-width) {
+      font-size: $current-font-size;
+    }
+  }
+}

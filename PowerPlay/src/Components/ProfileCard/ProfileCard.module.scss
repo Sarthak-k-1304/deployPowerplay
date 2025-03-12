@@ -1,0 +1,114 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+.card {
+  @include flex(column);
+  @include size(60vh, 28rem);
+  @include boxstyle(4rem, 2rem, border-box);
+  box-shadow: $box-shadow;
+  border-radius: 1rem;
+
+  body[data-theme="dark"] & {
+    box-shadow: $box-shadow-dark;
+    background-color: $card-bg-color-dark;
+  }
+}
+.detailbox {
+  @include size(40%, 100%);
+  @include flex(row);
+}
+.imgbox {
+  @include size(100%, 50%);
+  @include flex-center(row);
+  cursor: pointer;
+  position: relative;
+  &:hover .editIcon {
+    opacity: 1;
+  }
+  &:hover .profileimg {
+    opacity: 0.5;
+  }
+}
+.profileimg {
+  @include size(8rem, 8rem);
+  border-radius: 50%;
+  box-shadow: $box-shadow;
+  body[data-theme="dark"] & {
+    box-shadow: $box-shadow-dark;
+  }
+}
+.namebox {
+  @include size(100%, 50%);
+  @include boxstyle(null, 0 0 0 1rem);
+  @include flex(column, center, null, 1rem);
+}
+.themebox {
+  @include size(60%, 100%);
+  @include flex(column, space-between);
+  margin-top: 1rem;
+}
+.optionbox {
+  @include flex(row, space-between);
+  @include size(auto, 100%);
+  @include boxstyle(null, 0 0 0 1rem, border-box);
+}
+.themeselector {
+  @include size(2.5rem, 12rem);
+  @include boxstyle(null, 0.5rem, border-box);
+  body[data-theme="dark"] & {
+    background-color: $card-bg-color-dark;
+    color: $primary-text-color-dark;
+  }
+  border-radius: 0.5rem;
+}
+.buttonbox {
+  @include flex(row, center);
+}
+.button {
+  @include size(2.5rem, 12rem);
+  font-size: 1rem;
+  border-radius: 0.8rem;
+  background: $secondary-background;
+  body[data-theme="dark"] & {
+    color: $primary-text-color-dark;
+    background: $secondary-background-dark;
+  }
+}
+.theme {
+  margin: 0.4rem 0 0.4rem 0;
+  font-size: 1.2rem;
+}
+
+.uploadbox {
+  flex-direction: column;
+  @include size(80%, 80%);
+  border: solid black;
+  background: $secondary-background;
+  body[data-theme="dark"] & {
+    color: $primary-text-color-dark;
+    background: $secondary-background-dark;
+  }
+}
+.photoupload {
+  @include flex-center;
+  @include size(70%, 100%);
+}
+
+.editIcon {
+  position: absolute;
+  bottom: 2rem;
+  right: 5rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: #5d0606;
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 1rem;
+  opacity: 0;
+}
+.dropper {
+  @include flex-center;
+  height: 50%;
+}
+.uploader {
+  @include flex-center;
+  height: 50%;
+}
