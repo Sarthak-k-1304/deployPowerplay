@@ -104,6 +104,12 @@
     "type": "git",
     "url": "git+https://github.com/Sarthak-k-1304/tekion-intern-new.git"
   },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "author": "Sarthak Kaushik",
   "license": "ISC",
   "bugs": {
