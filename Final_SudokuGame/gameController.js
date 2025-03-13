@@ -5,31 +5,17 @@ import { generateVisibleMatrix } from "./visibleMatrix.js";
 let game = null;
 let playerName = "";
 
-window.addEventListener("message", (event) => {
-  if (event.origin !== "https://deploy-powerplay-fv69.vercel.app") return;
-
-  if (event.data.type === "SEND_USERNAME") {
-    playerName = event.data.playerName?.trim();
-
-    console.log("Received player name:", playerName);
-
-    if (!playerName) {
-      playerName = prompt("Enter Player Name") || "";
-    }
-
-    if (playerName) {
-      startNewGame(playerName); // Start game as soon as username is received
-    } else {
-      console.warn("Player name is required to start the game!");
-    }
-  }
-});
-
 export const createGame = function () {
   const startNewGame = (name) => {
-    if (!name) return;
+    if (!name) {
+      console.warn("Player name is required to start the game!");
+      return;
+    }
 
-    game = new Sudoku(name);
+    playerName = name; // Update player name globally
+    game = new Sudoku(playerName);
+
+    // Set the matrices
     game.setMatrix(generateAnsMatrix(game.getMatrix()));
     game.setVisiblematrix(
       generateVisibleMatrix(
@@ -50,3 +36,20 @@ export const createGame = function () {
     getName: () => playerName,
   };
 };
+
+// Listen for messages from the parent (Powerplay app)
+window.addEventListener("message", (event) => {
+  if (event.origin !== "https://powerplays-psi.vercel.app/") return;
+
+  if (event.data.type === "SEND_USERNAME") {
+    const receivedName = event.data.playerName?.trim();
+    console.log("Received player name:", receivedName);
+
+    // Use the received name or prompt for one
+    const finalName = receivedName || prompt("Enter Player Name");
+    if (finalName) {
+      const gameInstance = createGame();
+      gameInstance.startNewGame(finalName);
+    }
+  }
+});
