@@ -1,3 +1,4 @@
+// check whether number can be placed in the cell
 const isSafe = function (rowindx, colindx, num, row, col, box) {
   if (
     (row[rowindx] & (1 << (num - 1))) !== 0 ||
@@ -10,6 +11,8 @@ const isSafe = function (rowindx, colindx, num, row, col, box) {
   }
   return true;
 };
+
+// Recursive function to create matrix
 
 const matrixGenRec = function (rowindx, colindx, n, matrix, row, col, box) {
   if (rowindx == n - 1 && colindx == n) return true;
@@ -46,6 +49,8 @@ const matrixGenRec = function (rowindx, colindx, n, matrix, row, col, box) {
     }
   }
 };
+
+// give us the answer Matrix
 
 export const generateAnsMatrix = function (matrix) {
   const row = new Array(9).fill(0);

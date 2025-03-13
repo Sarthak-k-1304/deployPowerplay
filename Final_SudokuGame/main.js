@@ -1,10 +1,10 @@
-import { createGame } from "./game-controller.js";
-import { createButtons, createGrid } from "./ui-creation.js";
-import { setupUihandler } from "./ui-handler.js";
+import { createGame } from "./gameController.js";
+import { createButtons, createGrid } from "./uiCreation.js";
+import { setupUihandler } from "./uiHandler.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   createGrid();
   createButtons();
-  let currentGame = createGame();
-  setupUihandler(currentGame);
+  let currentGame = createGame(); // create the game
+  setupUihandler(currentGame); // set up the buttons
 });

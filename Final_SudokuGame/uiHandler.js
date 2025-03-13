@@ -1,6 +1,9 @@
 export const setupUihandler = function (currentGame) {
-  const newGame = document.getElementById("new-game");
   const cells = document.querySelectorAll(".cell");
+  const newGame = document.getElementById("new-game");
+
+  // New Game Button
+
   newGame.addEventListener("click", () => {
     currentGame.startNewGame();
     let game = currentGame.getGame();
@@ -13,6 +16,7 @@ export const setupUihandler = function (currentGame) {
     });
   });
 
+  // Validate Result Button to display the result
   const validateResult = document.getElementById("check-result");
   validateResult.addEventListener("click", () => {
     let game = currentGame.getGame();
@@ -20,11 +24,16 @@ export const setupUihandler = function (currentGame) {
     game.endTime = Date.now();
     console.log(correct);
     console.log("hi", game.prefilledcell);
-    if (game.prefilledcell !== 81) alert("please complete the grid");
-    else if (correct !== 81) alert("you lost");
-    else alert("Wohoo you won");
+    if (game.prefilledcell !== 81) {
+      alert("please complete the grid");
+    } else if (correct === 81) {
+      alert("Wooho You Won");
+    } else {
+      alert("you lost");
+    }
   });
 
+  // This button is only for developer to immediately fill the grid
   const test = document.getElementById("test");
   test.addEventListener("click", () => {
     let temp = 0;
@@ -41,4 +50,9 @@ export const setupUihandler = function (currentGame) {
     game.incrementcorrectcell(temp);
     game.prefilledcell = 81;
   });
+
+  const namediv = document.querySelector(".name");
+  const NameEntered = document.createElement("h1");
+  NameEntered.textContent = currentGame.getName();
+  namediv.append(NameEntered);
 };

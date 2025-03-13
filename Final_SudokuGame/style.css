@@ -1,17 +1,25 @@
 body {
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .sudoku-box {
   box-sizing: border-box;
   border: 0.2vh solid black;
   border-bottom: 0.4vh solid black;
-  /* background-color: rgb(232, 232, 123); */
+  background-color: rgb(232, 232, 123);
   display: flex;
   flex-direction: column;
 }
+.sudoku-box input {
+  background-color: rgb(232, 232, 123);
+}
 @media screen and (orientation: landscape) {
+  .grid-buttons {
+    height: 50vh;
+  }
   .sudoku-box {
     height: 50vh;
     width: 50vh;
@@ -24,15 +32,27 @@ body {
   }
   .cell {
     border: 0.1vh solid black;
-    font-size: 6vh;
+    font-size: 4vh;
+  }
+  .button-div {
+    flex-direction: column;
+    justify-content: end;
+    height: 50vh;
+    width: 20vh;
+    gap: 8vh;
+  }
+  .button {
+    width: 100%;
+  }
+  .content {
+    gap: 5vh;
   }
 }
 @media screen and (orientation: portrait) {
   .sudoku-box {
-    position: absolute;
     top: calc(50vh - 50vw);
-    width: 60vw;
-    height: 60vw;
+    width: 40vw;
+    height: 40vw;
   }
   .row {
     border: 0.1vw solid black;
@@ -42,8 +62,30 @@ body {
   }
   .cell {
     border: 0.1vw solid black;
-    font-size: 6vw;
+    font-size: 4vw;
   }
+  .grid-buttons {
+    flex-direction: column;
+    width: 42vw;
+    height: 100%;
+  }
+  .button-div {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1vh;
+  }
+  .button {
+    width: 100%;
+    height: calc(100% / 4);
+  }
+}
+.content {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .row {
   box-sizing: border-box;
@@ -63,25 +105,35 @@ body {
   padding: 0;
 }
 
-.main {
+.grid-buttons {
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
   gap: 5vh;
 }
 
 .button-div {
-  height: 50vh;
-  width: 20vh;
   display: flex;
-  flex-direction: column;
-  justify-content: end;
-  gap: 8vh;
 }
 .button {
-  width: 100%;
-  height: 8vh;
+  min-height: 8vh;
   border-radius: 5px;
   cursor: pointer;
+  white-space: normal; /* Allows text wrapping */
+  word-break: break-word;
+}
+
+.heading {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

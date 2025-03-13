@@ -3,6 +3,7 @@ export const generateVisibleMatrix = function (
   visiblematrix,
   visibleNumbers
 ) {
+  // Create a pair of array with each bigger cell indicating the number of values in it
   let mapping = [...Array(9)].map((_, index) => [index, 0]);
 
   let extras = visibleNumbers - 9 * Math.floor(visibleNumbers / 9);
@@ -37,7 +38,7 @@ export const generateVisibleMatrix = function (
       if (value == minumberallowed) extras--;
       visibleNumbers--;
       mapping[index][1]++;
-    } else mapping.splice(index, 1);
+    } else mapping.splice(index, 1); // when a box completely filled it is removed from array;
   }
   return visiblematrix;
 };
