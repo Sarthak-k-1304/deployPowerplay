@@ -52,8 +52,7 @@ window.addEventListener("message", (event) => {
     // Use the received name or prompt for one
     const finalName = receivedName || prompt("Enter Player Name");
     if (finalName) {
-      const gameInstance = createGame();
-      gameInstance.startNewGame(finalName);
+      createGame.startNewGame(finalName);
     }
   }
 });
