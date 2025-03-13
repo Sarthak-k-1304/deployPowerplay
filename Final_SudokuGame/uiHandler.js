@@ -7,6 +7,7 @@ export const setupUihandler = function (currentGame) {
   newGame.addEventListener("click", () => {
     currentGame.startNewGame();
     let game = currentGame.getGame();
+    console.log(game);
 
     cells.forEach((cell) => {
       cell.addEventListener("input", () => {
@@ -54,5 +55,6 @@ export const setupUihandler = function (currentGame) {
   const namediv = document.querySelector(".name");
   const NameEntered = document.createElement("h1");
   NameEntered.textContent = currentGame.getName();
+  console.log("fafad", currentGame.getName());
   namediv.append(NameEntered);
 };
