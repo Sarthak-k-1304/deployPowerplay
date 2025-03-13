@@ -3,8 +3,18 @@ import { Sudoku } from "./sudokuGamePrototype.js";
 import { generateVisibleMatrix } from "./visibleMatrix.js";
 
 // create the game
+
+let name = "";
+window.addEventListener("message", (event) => {
+  if (event.origin !== "https://deploy-powerplay-fv69.vercel.app") return;
+
+  if (event.data.type === "SEND_USERNAME") {
+    name = event.data.playerName;
+    console.log("Received player name:", name);
+  }
+});
 export const createGame = function () {
-  const name = prompt("Please Enter your name");
+  if (name === "") name = prompt("Please Enter your name");
   let game = null;
   const startNewGame = () => {
     game = new Sudoku(name);

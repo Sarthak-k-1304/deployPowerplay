@@ -1,18 +1,20 @@
 import { useEffect, useRef } from "react";
-export const SudokuGame = ({ name }) => {
+import { useAppContext } from "../../../Context";
+export const SudokuGame = () => {
+  const { userName } = useAppContext();
   const iframeRef = useRef(null);
 
   useEffect(() => {
-    if (iframeRef.current) {
+    if (iframeRef.current && userName) {
       iframeRef.current.onload = () => {
         // Send the player name to the Sudoku iframe
         iframeRef.current.contentWindow.postMessage(
-          { playerName: name },
-          "http://127.0.0.1:5500/" // Ensure this matches your Sudoku game URL
+          { type: "SEND_USERNAME", playerName: userName },
+          "https://sudoku-ten-gules.vercel.app/" // Sudoku game URL
         );
       };
     }
-  }, [name]);
+  }, [userName]);
   return (
     <iframe
       ref={iframeRef}
