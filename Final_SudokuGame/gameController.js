@@ -39,7 +39,10 @@ export const createGame = function () {
 
 // Listen for messages from the parent (Powerplay app)
 window.addEventListener("message", (event) => {
-  if (event.origin !== "https://powerplays-psi.vercel.app/") return;
+  if (event.origin !== "https://powerplays-psi.vercel.app/") {
+    console.log("hello");
+    return;
+  }
 
   if (event.data.type === "SEND_USERNAME") {
     const receivedName = event.data.playerName?.trim();
