@@ -8,7 +8,7 @@ export const SudokuGame = ({ name }) => {
         // Send the player name to the Sudoku iframe
         iframeRef.current.contentWindow.postMessage(
           { playerName: name },
-          "http://127.0.0.1:5500/" // Ensure this matches your Sudoku game URL
+          "https://sudoku-ten-gules.vercel.app/" // Ensure this matches your Sudoku game URL
         );
       };
     }
