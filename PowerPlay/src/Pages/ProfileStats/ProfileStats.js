@@ -1,62 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { service } from "../../appwrite/config";
 import styles from "./ProfileStats.module.scss";
 import { FaFilter } from "react-icons/fa";
 import { useAppContext } from "../../Context";
+import { usePaginatedData, useSearchFilter } from "./Customhooks";
 export function ProfileStats() {
   const { userName } = useAppContext();
-  const [data, setData] = useState([]);
-  const [pages, setPages] = useState(0);
   const [currPage, setCurrPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
   const itemsperPage = 8;
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const { data, pages, isLoading } = usePaginatedData(
+    userName,
+    itemsperPage,
+    service,
+    currPage
+  ); // custom hooks
 
-  const filteredData = searchQuery
-    ? data.filter((item) => {
-        const lowerQuery = searchQuery.toLowerCase().trim();
-
-        // Format the date to a searchable string
-        const formattedDate = new Date(item.Date)
-          .toLocaleString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: true,
-          })
-          .toLowerCase()
-          .replace(/,/g, "") // Remove commas
-          .replace(/\s+/g, " "); // Collapse extra spaces
-
-        // Combine game name and date into a single string
-        const combinedString = `${item.Game.toLowerCase()} ${formattedDate}`;
-
-        // Match the entire query as a **single sequence**
-        return combinedString.includes(lowerQuery);
-      })
-    : data;
-
-  const fetchData = async (page) => {
-    try {
-      const offset = (page - 1) * itemsperPage;
-      const response = await service.getTable(userName, itemsperPage, offset);
-      if (response) {
-        setData(response.documents);
-        console.log(response.total);
-        setPages(Math.ceil(response.total / itemsperPage));
-      }
-    } catch (error) {
-      console.error("Failed to fetch data:", error);
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    fetchData(currPage);
-  }, [currPage]);
+  const { searchQuery, setSearchQuery, filteredData } = useSearchFilter(data); // custom hooks
 
   const nextPage = () => {
     if (currPage < pages) setCurrPage((prev) => prev + 1);
