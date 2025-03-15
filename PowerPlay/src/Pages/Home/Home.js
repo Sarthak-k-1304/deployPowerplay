@@ -8,9 +8,15 @@ import { service } from "../../appwrite/config";
 
 export function Home() {
   let navigate = useNavigate();
-  const { updateUsername, setImage } = useAppContext();
+  const { userName, updateUsername, setImage } = useAppContext();
   const [error, setError] = useState("");
   const [localname, setLocalname] = useState("");
+
+  useEffect(() => {
+    if (userName) {
+      navigate("/games", { replace: true });
+    }
+  }, [userName]);
 
   const ValidateUser = (name) => {
     if (name === "") return "username need to be entered";

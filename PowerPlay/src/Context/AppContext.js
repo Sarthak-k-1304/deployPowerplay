@@ -2,27 +2,16 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 import ProfileImage from "../../public/10946073.jpg";
 import { FaCircleUser } from "react-icons/fa6";
+import { useLocalStorage } from "./Customhooks";
 
 export const AppContext = createContext();
 
 export const useAppContext = () => useContext(AppContext);
 
 export const AppProvider = ({ children }) => {
-  const [userName, setUsername] = useState(() => {
-    return localStorage.getItem("userName") || "";
-  });
-
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "light";
-  });
-
-  const [image, setImage] = useState(() => {
-    const storedUserName = localStorage.getItem("userName");
-    return storedUserName
-      ? localStorage.getItem(`image_${storedUserName}`) || ProfileImage
-      : ProfileImage;
-  });
-
+  const [userName, setUsername] = useLocalStorage("", "userName");
+  const [theme, setTheme] = useLocalStorage("", "userName");
+  const [image, setImage] = useLocalStorage(ProfileImage);
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
   }, [theme]);

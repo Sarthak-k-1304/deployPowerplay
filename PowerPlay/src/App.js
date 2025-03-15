@@ -15,10 +15,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route
-          index
-          element={username ? <Navigate to="/games" replace /> : <Home />}
-        />
+        <Route index element={<Home />} />
         <Route element={<ProtectedRoute />}>
           <Route path="games">
             <Route index element={<GameCards />} />
