@@ -1,4 +1,4 @@
-import { useNavigate, useState } from "react";
+import { useCallback, useNavigate, useState } from "react";
 import styles from "./Header.module.scss";
 import { FaCircleUser } from "react-icons/fa6";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
@@ -65,9 +65,9 @@ export function Header() {
     if (userName) navigate("/games");
   };
 
-  const toggleModal = () => {
+  const toggleModal = useCallback(() => {
     setShowModal((prev) => !prev);
-  };
+  }, []);
 
   const handleback = () => {
     if (location.pathname !== "/games") navigate(-1);

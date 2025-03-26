@@ -4,6 +4,7 @@ import styles from "./ProfileStats.module.scss";
 import { FaFilter } from "react-icons/fa";
 import { useAppContext } from "../../Context";
 import { usePaginatedData, useSearchFilter } from "./Customhooks";
+import { formatDate, getNextPage, getPrevPage } from "./Helperfunction";
 export function ProfileStats() {
   const { userName } = useAppContext();
   const [currPage, setCurrPage] = useState(1);
@@ -18,13 +19,9 @@ export function ProfileStats() {
 
   const { searchQuery, setSearchQuery, filteredData } = useSearchFilter(data); // custom hooks
 
-  const nextPage = () => {
-    if (currPage < pages) setCurrPage((prev) => prev + 1);
-  };
+  const nextPage = () => setCurrPage(getNextPage(currPage, pages));
 
-  const prevPage = () => {
-    if (currPage > 1) setCurrPage((prev) => prev - 1);
-  };
+  const prevPage = () => setCurrPage(getPrevPage(currPage));
 
   return (
     <div className={styles.statsContainer}>
@@ -61,16 +58,7 @@ export function ProfileStats() {
                     <td>{item.Game}</td>
                     <td>{item.Won}</td>
                     <td>{item.Lost}</td>
-                    <td>
-                      {new Date(item.Date).toLocaleString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "2-digit",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: true,
-                      })}
-                    </td>
+                    <td>{formatDate(item.Date)}</td>
                   </tr>
                 ))
               ) : (

@@ -9,12 +9,6 @@ export function ProfileCard() {
   const [showUploadBox, setShowUploadBox] = useState(false);
   const { userName, theme, toggleTheme, image, setImage } = useAppContext();
 
-  const fetchImage = () => {};
-
-  useEffect(() => {
-    if (userName) localStorage.setItem(`image_${userName}`, image);
-  }, [userName, image]);
-
   const handleThemeChange = () => {
     toggleTheme();
   };
@@ -34,19 +28,24 @@ export function ProfileCard() {
     if (file && file.type.startsWith("image/")) {
       console.log("File dropped:", file);
 
+      // previews the image
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setImage(event.target.result);
+        setShowUploadBox(false);
+      };
+      reader.readAsDataURL(file);
+
       try {
         await service.uploadImg(file, userName); // Upload the file directly
         const imageUrl = await service.getUserImage(userName); // Fetch the uploaded image
-        console.log("heelo", imageUrl);
-        setImage(imageUrl); // Update the state with the image URL
         localStorage.setItem(`image_${userName}`, imageUrl);
-        setShowUploadBox(false); // Close the upload box
       } catch (error) {
         console.error("Image upload failed:", error);
       }
     }
   };
-  const handleFileSelect = (e) => {
+  const handleFileSelect = async (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
@@ -55,6 +54,14 @@ export function ProfileCard() {
         setShowUploadBox(false);
       };
       reader.readAsDataURL(file);
+
+      try {
+        await service.uploadImg(file, userName); // Upload the file directly
+        const imageUrl = await service.getUserImage(userName); // Fetch the uploaded image
+        localStorage.setItem(`image_${userName}`, imageUrl);
+      } catch (error) {
+        console.error("Image upload failed:", error);
+      }
     } else {
       alert("Please select a valid image file.");
     }

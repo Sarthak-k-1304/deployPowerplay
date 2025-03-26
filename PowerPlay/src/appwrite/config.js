@@ -80,6 +80,20 @@ export class Service {
   }
 
   async uploadImg(file, userName) {
+    const response = await this.bucket.listFiles(conf.appwriteBucketID, [
+      Query.startsWith("$id", `${userName}`), // Get the user's image
+      Query.orderDesc("$createdAt"), // Sort by latest
+      Query.limit(1), // Get only the latest one
+    ]);
+
+    const oldFile = response.files[0];
+
+    // Step 2: If an old image exists, delete it
+    if (oldFile) {
+      await this.bucket.deleteFile(conf.appwriteBucketID, oldFile.$id);
+      console.log("Deleted old image:", oldFile.$id);
+    }
+
     try {
       return await this.bucket.createFile(
         conf.appwriteBucketID,
@@ -96,6 +110,7 @@ export class Service {
       const response = await this.bucket.listFiles(conf.appwriteBucketID, [
         Query.startsWith("$id", `${userName}`), // Match files starting with "userName-"
         Query.orderDesc("$createdAt"), // Sort by creation date, descending
+        Query.limit(1),
       ]);
 
       const file = response.files[0];
